@@ -1,9 +1,12 @@
-const mymodule = require('./mymodule')
+const http = require('http')
 
-const [,,path,extension] = process.argv
+const [,,url] = process.argv
 
-mymodule(path, extension, (err, files) => {
-    if (err) return console.log(err)
+http.get(url, (response) => {
+    response.setEncoding('utf8')
 
-    files.forEach(file => console.log(file))
+    response.on('data', console.log)
+
+    response.on('error', console.error)
 })
+.on('error', console.error)
