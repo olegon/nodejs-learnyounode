@@ -1,35 +1,28 @@
-const http = require('http')
+const net = require('net')
 
-const [,,...urls] = process.argv
-const results = []
-let done = 0;
+const [,,port] = process.argv
 
-function find(index, urls, results) {
-    const url = urls[index];
+const server = net.createServer(socket => {
+    socket.end(formatDate(new Date()))
+})
 
-    http.get(url, (response) => {
-        let text = ''
+function formatDate(date) {
+    const day = date.getDate()
+    const month = date.getMonth() + 1
+    const year = date.getFullYear()
 
-        response.setEncoding('utf8')
+    const hour = date.getHours()
+    const minute = date.getMinutes()
 
-        response.on('data', chunk => {
-            text += chunk
-        })
-
-        response.on('end', () => {
-            results[index] = text;
-            
-            if (++done == urls.length) {
-                results.forEach(result => console.log(result))
-            }
-        })
-
-        response.on('error', console.error)
-    })
-    .on('error', console.error)
+    return `${year}-${padleft(month, '0', 2)}-${padleft(day, '0', 2)} ${padleft(hour, '0', 2)}:${padleft(minute, '0', 2)}\n`
 }
 
-for (let i = 0; i < urls.length; i++) {
-    find(i, urls, results)
+function padleft(str, char, size) {
+    let result = str.toString()
+
+    while (result.length < size) result = char + result
+
+    return result
 }
 
+server.listen(Number(port))
