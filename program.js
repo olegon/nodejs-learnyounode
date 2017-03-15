@@ -2,7 +2,10 @@ const fs = require('fs')
 
 const [,,filename] = process.argv
 
-const contents = fs.readFileSync(filename).toString()
-const lines = contents.split('\n').length - 1;
+fs.readFile(filename, 'utf8', (err, contents) => {
+    if (err) throw err
 
-console.log(lines)
+    const lines = contents.split('\n').length - 1;
+
+    console.log(lines)
+})
