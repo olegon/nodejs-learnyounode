@@ -1,11 +1,11 @@
 const fs = require('fs')
 
-const [,,filename] = process.argv
+const [,,path,extension] = process.argv
 
-fs.readFile(filename, 'utf8', (err, contents) => {
+fs.readdir(path, (err, files) => {
     if (err) throw err
 
-    const lines = contents.split('\n').length - 1;
-
-    console.log(lines)
+    files
+        .filter(file => file.endsWith(`.${extension}`))
+        .forEach(file => console.log(file))
 })
