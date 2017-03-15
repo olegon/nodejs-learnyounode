@@ -1,11 +1,9 @@
-const fs = require('fs')
+const mymodule = require('./mymodule')
 
 const [,,path,extension] = process.argv
 
-fs.readdir(path, (err, files) => {
-    if (err) throw err
+mymodule(path, extension, (err, files) => {
+    if (err) return console.log(err)
 
-    files
-        .filter(file => file.endsWith(`.${extension}`))
-        .forEach(file => console.log(file))
+    files.forEach(file => console.log(file))
 })
