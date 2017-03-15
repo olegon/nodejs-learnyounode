@@ -19,3 +19,7 @@ Cada _branch_ é uma _lesson_.
 11. [HTTP FILE SERVER](https://github.com/olegon/nodejs-learnyounode/tree/HTTP-FILE-SERVER)
 11. [HTTP UPPERCASE](https://github.com/olegon/nodejs-learnyounode/tree/HTTP-UPPERCASE)
 11. [HTTP JSON API SERVER](https://github.com/olegon/nodejs-learnyounode/tree/HTTP-JSON-API-SERVER)
+
+# Versão
+
+Baseado na versão 3.5.10
