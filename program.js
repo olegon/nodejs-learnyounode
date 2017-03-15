@@ -1,7 +1,8 @@
-const [,,...args] = process.argv
+const fs = require('fs')
 
-const sum = args
-    .map(t => Number(t))
-    .reduce((p, c) => p + c, 0)
+const [,,filename] = process.argv
 
-console.log(sum)
+const contents = fs.readFileSync(filename).toString()
+const lines = contents.split('\n').length - 1;
+
+console.log(lines)
